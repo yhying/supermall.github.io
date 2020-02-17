@@ -5,11 +5,13 @@
     </nav-bar>
     <Swiper :banners="banners">
     </Swiper>
+    <RecommendView :recomends="recomends"></RecommendView>
   </div>
 </template>
 <script>
   import NavBar from 'components/common/navbar/NavBar'
   import Swiper from './childComps/HomeSwiper.vue'
+  import RecommendView from './childComps/RecommendView.vue'
   import {
     getHomeMuticata
   } from 'network/home.js'
@@ -17,6 +19,7 @@
     components: {
       NavBar,
       Swiper,
+      RecommendView
     },
     data() {
       return {
