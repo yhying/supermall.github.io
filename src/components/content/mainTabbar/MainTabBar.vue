@@ -34,8 +34,8 @@
       TabBarItem
     }
   }
+
 </script>
 
 <style scoped>
-
 </style>

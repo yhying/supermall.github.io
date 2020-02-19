@@ -1,6 +1,102 @@
 <template>
     <div>
-        分类
+      <ul>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+          <li>我爱你</li>
+      </ul>
     </div>
 </template>
 <script>
@@ -8,6 +104,11 @@ export default {
     
 }
 </script>
-<style lang="" scope>
-    
+<style scoped>
+    ul {
+        height: 200px;
+        background-color: aquamarine;
+        max-height: 200px;
+        overflow-y: scroll;
+    }
 </style>
