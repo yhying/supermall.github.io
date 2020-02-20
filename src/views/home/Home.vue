@@ -3,57 +3,60 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <Swiper :banners="banners">
-    </Swiper>
-    <Recommend-View :recomends="recomends"></Recommend-View>
-    <feature-view></feature-view>
-    <tab-Control :title="['流行','排行','销售']" @tabclick="tabClick"></tab-Control>
-    <Good-List :goods="goods[currtype].list"></Good-List>
-    <ul>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-    </ul>
+    <Scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true">
+      <Swiper :banners="banners">
+      </Swiper>
+      <Recommend-View :recomends="recomends"></Recommend-View>
+      <feature-view></feature-view>
+      <tab-Control class="tab-control" :title="['流行','排行','销售']" @tabclick="tabClick"></tab-Control>
+      <Good-List :goods="goods[currtype].list"></Good-List>
+      <Back-Top @click.native="backTopClick"></Back-Top>
+      <ul>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+      </ul>
+    </Scroll>
   </div>
 </template>
 <script>
   import NavBar from 'components/common/navbar/NavBar'
   import tabControl from 'components/content/tabControl.vue'
   import GoodList from 'components/content/goods/GoodsList'
-  // import Scroll from 'components/common/scroll/Scroll'
+  import Scroll from 'components/common/scroll/Scroll'
   import BackTop from 'components/content/backTop/BackTop'
   import Swiper from './childComps/HomeSwiper.vue'
   import RecommendView from './childComps/RecommendView.vue'
@@ -70,6 +73,7 @@
       FeatureView,
       tabControl,
       GoodList,
+      Scroll,
       BackTop
     },
     data() {
@@ -117,7 +121,9 @@
             break;
         }
       },
-
+      backTopClick(){
+        this.$refs.scroll.scrollTo(0,0)
+      },
       /* 
       网络请求相关方法
       */
@@ -141,10 +147,11 @@
   }
 
 </script>
-<style scope>
+<style scoped>
   .home {
     position: relative;
-    padding-top: 44px;
+    height: 100vh;
+    /* padding-top: 44px; */
   }
 
   .home-nav {
@@ -156,7 +163,14 @@
     background-color: var(--color-tint);
     color: #fff;
   }
-
+  .content {
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
+  }
   /* img {
       width: 100%;
   } */

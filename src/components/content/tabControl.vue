@@ -29,15 +29,15 @@
 </script>
 <style scoped>
   .tabControl {
-    position: sticky;
-    top: 44px;
+    /* position: sticky;  /* 原生已经无效，引入bettercontrol后 */
+    /* top: 44px;
+    z-index: 9; */ 
     display: flex;
     text-align: center;
     font-size: 15px;
     height: 40px;
     line-height: 40px;
     background-color: #fff;
-    z-index: 9;
   }
   .tab-item {
     flex: auto;
