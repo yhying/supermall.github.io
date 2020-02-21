@@ -30,7 +30,7 @@
     mounted() {
       // 1.创建BScroll对象
       this.scroll = new BScroll(this.$refs.wrapper, {
-        click: true,
+        click:true,  /* betterscotrl 里面除了button 若为false其他不能被点击， */
         probeType: this.probeType,
         pullUpLoad: this.pullUpLoad
       })

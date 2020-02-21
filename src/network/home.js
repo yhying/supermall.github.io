@@ -2,12 +2,14 @@ import {request} from './request.js'
 
 export function getHomeMuticata(){
     return request({
-        url:'/home/multidata'
+        url:'/home/multidata',
+        method: "GET",
     })
 }
 export function getHomegoods(type,page){
     return request({
         url:'/home/data',
+        method: "GET",
         params:{
             type,
             page

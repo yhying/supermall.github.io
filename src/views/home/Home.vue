@@ -8,47 +8,9 @@
       </Swiper>
       <Recommend-View :recomends="recomends"></Recommend-View>
       <feature-view></feature-view>
-      <tab-Control class="tab-control" :title="['流行','排行','销售']" @tabclick="tabClick"></tab-Control>
+      <tab-Control class="tab-control" :title="titleList" @tabclick="tabClick"></tab-Control>
       <Good-List :goods="goods[currtype].list"></Good-List>
       <Back-Top @click.native="backTopClick"></Back-Top>
-      <ul>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-        <li>1</li>
-      </ul>
     </Scroll>
   </div>
 </template>
@@ -80,6 +42,7 @@
       return {
         banners: [],
         recomends: [],
+        titleList:[],
         goods: {
           'pop': {
             page: 0,
@@ -138,9 +101,9 @@
       getHomegoods(type) {
         const page = this.goods[type].page + 1
         getHomegoods(type, page).then(res => {
-          console.log(this.goods[type]);
-          console.log(page);
           console.log(res);
+          this.titleList=res.data.filter.list
+          this.goods[type].list=res.data.list
         })
       },
     },
