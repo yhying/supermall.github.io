@@ -3,15 +3,15 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <Scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true">
+    <Scroll class="content" ref="scroll" :probe-type="0" :pull-up-load="true" @scroll="contentScroll" @pullingUp="loadmore">
       <Swiper :banners="banners">
       </Swiper>
       <Recommend-View :recomends="recomends"></Recommend-View>
       <feature-view></feature-view>
       <tab-Control class="tab-control" :title="titleList" @tabclick="tabClick"></tab-Control>
       <Good-List :goods="goods[currtype].list"></Good-List>
-      <Back-Top @click.native="backTopClick"></Back-Top>
     </Scroll>
+    <Back-Top @click.native="backTopClick" v-show="isBackTop"></Back-Top>
   </div>
 </template>
 <script>
@@ -42,7 +42,8 @@
       return {
         banners: [],
         recomends: [],
-        titleList:[],
+        titleList: [],
+        isBackTop: false,
         goods: {
           'pop': {
             page: 0,
@@ -84,15 +85,23 @@
             break;
         }
       },
-      backTopClick(){
-        this.$refs.scroll.scrollTo(0,0)
+      backTopClick() {
+        this.$refs.scroll.scrollTo(0, 0)
+      },
+      contentScroll(position) {
+        console.log(position.y);
+        this.isBackTop =(-position.y) > 1000
+      },
+      loadmore(){
+        this.getHomegoods(this.currtype)
+        console.log('上拉加载等更多');
       },
       /* 
       网络请求相关方法
       */
       getHomeMuticata() {
         getHomeMuticata().then(res => {
-          console.log(res);
+          // console.log(res);
           this.banners = res.data.banner.list /*轮播图数据*/
           this.recomends = res.data.recommend.list /*  */
         })
@@ -101,9 +110,11 @@
       getHomegoods(type) {
         const page = this.goods[type].page + 1
         getHomegoods(type, page).then(res => {
-          console.log(res);
-          this.titleList=res.data.filter.list
-          this.goods[type].list=res.data.list
+          // console.log(res);
+          this.titleList = res.data.filter.list
+          this.goods[type].list.push(...res.data.list)
+          this.goods[type].page+=1
+          this.$refs.scroll.finishPullUp()
         })
       },
     },
@@ -126,6 +137,7 @@
     background-color: var(--color-tint);
     color: #fff;
   }
+
   .content {
     overflow: hidden;
     position: absolute;
@@ -134,6 +146,7 @@
     left: 0;
     right: 0;
   }
+
   /* img {
       width: 100%;
   } */
