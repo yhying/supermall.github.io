@@ -3,12 +3,14 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <Scroll class="content" ref="scroll" :probe-type="0" :pull-up-load="true" @scroll="contentScroll" @pullingUp="loadmore">
-      <Swiper :banners="banners">
+    <tab-Control class="tab-control" :title="titleList" @tabclick="tabClick" ref="tabControlref1" v-show="istabfixed"></tab-Control>
+    <Scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true" @scroll="contentScroll"
+      @pullingUp="loadmore">
+      <Swiper :banners="banners" @imgLoad="swiperImgLoad">
       </Swiper>
       <Recommend-View :recomends="recomends"></Recommend-View>
       <feature-view></feature-view>
-      <tab-Control class="tab-control" :title="titleList" @tabclick="tabClick"></tab-Control>
+      <tab-Control :title="titleList" @tabclick="tabClick" ref="tabControlref2"></tab-Control>
       <Good-List :goods="goods[currtype].list"></Good-List>
     </Scroll>
     <Back-Top @click.native="backTopClick" v-show="isBackTop"></Back-Top>
@@ -23,6 +25,9 @@
   import Swiper from './childComps/HomeSwiper.vue'
   import RecommendView from './childComps/RecommendView.vue'
   import FeatureView from './childComps/FeatureView.vue'
+  import {
+    debounce
+  } from 'common/utils.js'
   import {
     getHomeMuticata,
     getHomegoods
@@ -58,7 +63,9 @@
             list: []
           }
         },
-        currtype: 'pop'
+        currtype: 'pop',
+        tabOffset: 0,
+        istabfixed:false,
       }
     },
     created() {
@@ -66,6 +73,13 @@
       this.getHomegoods('pop')
       this.getHomegoods('new')
       this.getHomegoods('sell')
+    },
+    mounted() {
+      //监听图片加载完成事件 
+      const refresh = debounce(this.$refs.scroll.refresh, 50)
+      this.$bus.$on('ImgLoad', () => {
+        refresh()
+      })
     },
     methods: {
       /* 
@@ -84,17 +98,28 @@
             this.currtype = 'sell'
             break;
         }
+        this.$refs.tabControlref2.currentindex=index;
+        this.$refs.tabControlref1.currentindex=index;
       },
       backTopClick() {
         this.$refs.scroll.scrollTo(0, 0)
       },
       contentScroll(position) {
-        console.log(position.y);
-        this.isBackTop =(-position.y) > 1000
+        // console.log(position.y);
+                // 1.判断BackTop是否显示
+        this.isBackTop = (-position.y) > 1000
+        // 2.决定tabControl是否吸顶(position: fixed)
+        this.istabfixed=(-position.y) >this.tabOffset
+
       },
-      loadmore(){
+      loadmore() {
         this.getHomegoods(this.currtype)
         console.log('上拉加载等更多');
+      },
+      // 监听轮播图加载完成
+      swiperImgLoad() {
+        this.tabOffset = this.$refs.tabControlref2.$el.offsetTop
+        // console.log(this.tabOffset);
       },
       /* 
       网络请求相关方法
@@ -113,7 +138,7 @@
           // console.log(res);
           this.titleList = res.data.filter.list
           this.goods[type].list.push(...res.data.list)
-          this.goods[type].page+=1
+          this.goods[type].page += 1
           this.$refs.scroll.finishPullUp()
         })
       },
@@ -129,11 +154,11 @@
   }
 
   .home-nav {
-    position: fixed;
+    /* position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 999;
+    z-index: 999; */
     background-color: var(--color-tint);
     color: #fff;
   }
@@ -146,6 +171,16 @@
     left: 0;
     right: 0;
   }
+  .tab-control {
+    position: relative;
+    z-index: 999;
+  }
+  /* .fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top:44px;
+  } */
 
   /* img {
       width: 100%;
