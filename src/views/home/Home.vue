@@ -4,8 +4,8 @@
       <div slot="center">购物街</div>
     </nav-bar>
     <tab-Control class="tab-control" :title="titleList" @tabclick="tabClick" ref="tabControlref1" v-show="istabfixed"></tab-Control>
-    <Scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true" @scroll="contentScroll"
-      @pullingUp="loadmore">
+      <Scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true" @scroll="contentScroll"
+      @pullingUp="loadmore" >
       <Swiper :banners="banners" @imgLoad="swiperImgLoad">
       </Swiper>
       <Recommend-View :recomends="recomends"></Recommend-View>
@@ -66,7 +66,19 @@
         currtype: 'pop',
         tabOffset: 0,
         istabfixed:false,
+        saveY:0,
       }
+    },
+    destroyed() {
+      console.log(111);
+    },
+    activated() {
+      console.log(this.saveY);
+      this.$refs.scroll.scrollTo(0,this.saveY,0)
+      this.$refs.scroll.refresh()
+    },
+    deactivated() {
+    this.saveY=this.$refs.scroll.getsaveY()
     },
     created() {
       this.getHomeMuticata()

@@ -24,7 +24,8 @@
     data() {
       return {
         scroll: null,
-        message: '哈哈哈'
+        message: '哈哈哈',
+        saveY:0,
       }
     },
     mounted() {
@@ -40,6 +41,7 @@
         this.scroll.on('scroll', (position) => {
         // console.log(position);
         this.$emit('scroll', position)
+        this.saveY=position.y
       })
       }
 
@@ -60,6 +62,11 @@
       refresh(){
         // console.log('------');
         this.scroll && this.scroll.refresh()
+      },
+      getsaveY(){
+        console.log(this.saveY);
+        console.log(this.scroll.y);
+        return this.scroll?this.scroll.y:0
       }
     }
   }
