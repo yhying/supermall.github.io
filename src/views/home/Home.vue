@@ -87,6 +87,7 @@
       this.getHomegoods('sell')
     },
     mounted() {
+      // console.log(this.$refs.scroll.refresh());
       //监听图片加载完成事件 
       const refresh = debounce(this.$refs.scroll.refresh, 50)
       this.$bus.$on('ImgLoad', () => {
