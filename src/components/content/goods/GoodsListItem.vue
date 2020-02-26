@@ -22,6 +22,7 @@
     },
     methods: {
       ImgLoad(){
+        // console.log('图片加载成功');
         this.$bus.$emit('ImgLoad')
       },
       ItemClick(){

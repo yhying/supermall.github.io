@@ -73,7 +73,7 @@
       console.log(111);
     },
     activated() {
-      console.log(this.saveY);
+      // console.log(this.saveY);
       this.$refs.scroll.scrollTo(0,this.saveY,0)
       this.$refs.scroll.refresh()
     },
@@ -89,8 +89,10 @@
     mounted() {
       // console.log(this.$refs.scroll.refresh());
       //监听图片加载完成事件 
-      const refresh = debounce(this.$refs.scroll.refresh, 50)
+      console.log(this);
+      const refresh = debounce(this.$refs.scroll.refresh, 0)
       this.$bus.$on('ImgLoad', () => {
+        // console.log('111');
         refresh()
       })
     },
