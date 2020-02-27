@@ -25,9 +25,7 @@
   import Swiper from './childComps/HomeSwiper.vue'
   import RecommendView from './childComps/RecommendView.vue'
   import FeatureView from './childComps/FeatureView.vue'
-  import {
-    debounce
-  } from 'common/utils.js'
+  import {itemMixin} from 'common/mixin.js'
   import {
     getHomeMuticata,
     getHomegoods
@@ -43,6 +41,7 @@
       Scroll,
       BackTop
     },
+    mixins:[itemMixin],
     data() {
       return {
         banners: [],
@@ -67,6 +66,7 @@
         tabOffset: 0,
         istabfixed:false,
         saveY:0,
+        itemLister:null
       }
     },
     destroyed() {
@@ -78,7 +78,10 @@
       this.$refs.scroll.refresh()
     },
     deactivated() {
+      // 获取saveY
     this.saveY=this.$refs.scroll.getsaveY()
+    // 取消itemLister事件
+    this.$bus.$off('ImgLoad',this.itemLister) /* 第二个参数必须传入一个函数 */
     },
     created() {
       this.getHomeMuticata()
@@ -87,13 +90,8 @@
       this.getHomegoods('sell')
     },
     mounted() {
-      // console.log(this.$refs.scroll.refresh());
-      //监听图片加载完成事件 
-      console.log(this);
-      const refresh = debounce(this.$refs.scroll.refresh, 0)
-      this.$bus.$on('ImgLoad', () => {
-        // console.log('111');
-        refresh()
+      this.$nextTick(()=>{
+        this.$refs.scroll.refresh()
       })
     },
     methods: {

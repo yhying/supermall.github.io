@@ -1,14 +1,14 @@
 <template>
   <div class="detail">
-    <detail-nav></detail-nav>
+    <detail-nav @titleClick="titleClick"></detail-nav>
     <scroll class="content" ref="scroll">
       <detail-swiper :TopImages="Topimages"></detail-swiper>
       <detailbase-info :goods="goods"></detailbase-info>
       <Detailshop-Info :shop="shop"></Detailshop-Info>
       <DetailGoods-Info :detailInfo="detailInfo" @imageLoad="DetailImageLoad"></DetailGoods-Info>
-      <DetailParams-Info :paramInfo="paramInfo"></DetailParams-Info>
-      <DetailComment-Info :commentInfo="commentInfo"></DetailComment-Info>
-      <Good-List :goods="recommendList"></Good-List>
+      <DetailParams-Info ref="Titleparams" :paramInfo="paramInfo"></DetailParams-Info>
+      <DetailComment-Info ref="Titlecomment" :commentInfo="commentInfo"></DetailComment-Info>
+      <Good-List ref="TitleList" :goods="recommendList"></Good-List>
     </scroll>
   </div>
 </template>
@@ -22,6 +22,9 @@
   import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
   import GoodList from 'components/content/goods/GoodsList'
   import Scroll from 'components/common/scroll/Scroll'
+  import {
+    itemMixin
+  } from 'common/mixin.js'
   import {
     getdetail,
     goods,
@@ -41,8 +44,8 @@
       DetailCommentInfo,
       GoodList,
       Scroll
-
     },
+    mixins: [itemMixin],
     data() {
       return {
         iid: ' ',
@@ -50,9 +53,11 @@
         goods: {},
         shop: {},
         detailInfo: {},
-        paramInfo:{},
-        commentInfo:[],
-        recommendList:[]
+        paramInfo: {},
+        commentInfo: [],
+        recommendList: [],
+        itemLister: ' ',
+        titleTopoffset: []
       }
     },
     created() {
@@ -60,7 +65,30 @@
       this.getdetail(this.iid)
       this.getrecommend()
     },
+    mounted() {},
+    destroyed() {
+      // 取消itemLister事件
+      this.$bus.$off('ImgLoad', this.itemLister) /* 第二个参数必须传入一个函数 */
+    },
     methods: {
+      /* 
+      事件监听相关方法
+      */
+      DetailImageLoad() {
+        // console.log(111);
+        this.$refs.scroll.refresh()
+        this.titleTopoffset.push(0)
+        this.titleTopoffset.push(this.$refs.Titleparams.$el.offsetTop)
+        this.titleTopoffset.push(this.$refs.Titlecomment.$el.offsetTop)
+        this.titleTopoffset.push(this.$refs.TitleList.$el.offsetTop)
+        console.log(this.titleTopoffset);
+      },
+      titleClick(index) {
+        this.$refs.scroll.scrollTo(0, -this.titleTopoffset[index], 200)
+      },
+      /* 
+      网络请求相关方法
+      */
       getdetail(iid) {
         getdetail(iid).then(res => {
           console.log(res);
@@ -77,23 +105,19 @@
           // 5.获取参数的信息
           this.paramInfo = new GoodsParam(data.itemParams.info, data.itemParams.rule)
           // 获取评论信息
-          if(data.rate.cRate!==0){
-            this.commentInfo=data.rate.list
+          if (data.rate.cRate !== 0) {
+            this.commentInfo = data.rate.list
             console.log(this.commentInfo);
           }
         })
       },
       // 获取推荐数据
-      getrecommend(){
-        getrecommend().then(res=>{
+      getrecommend() {
+        getrecommend().then(res => {
           // console.log(res);
-          this.recommendList=res.data.list
-          console.log(this.recommendList);
+          this.recommendList = res.data.list
+          // console.log(this.recommendList);
         })
-      },
-      DetailImageLoad() {
-        // console.log(111);
-        this.$refs.scroll.refresh()
       }
     },
 
