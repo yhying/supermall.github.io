@@ -7,6 +7,8 @@
       <Detailshop-Info :shop="shop"></Detailshop-Info>
       <DetailGoods-Info :detailInfo="detailInfo" @imageLoad="DetailImageLoad"></DetailGoods-Info>
       <DetailParams-Info :paramInfo="paramInfo"></DetailParams-Info>
+      <DetailComment-Info :commentInfo="commentInfo"></DetailComment-Info>
+      <Good-List :goods="recommendList"></Good-List>
     </scroll>
   </div>
 </template>
@@ -17,12 +19,15 @@
   import DetailshopInfo from './childComps/DetailShopInfo.vue'
   import DetailGoodsInfo from './childComps/DetailGoodsInfo'
   import DetailParamsInfo from './childComps/DetailParamInfo.vue'
+  import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
+  import GoodList from 'components/content/goods/GoodsList'
   import Scroll from 'components/common/scroll/Scroll'
   import {
     getdetail,
     goods,
     Shop,
-    GoodsParam
+    GoodsParam,
+    getrecommend
   } from 'network/detail.js'
   export default {
     name: "Detail",
@@ -33,6 +38,8 @@
       DetailshopInfo,
       DetailGoodsInfo,
       DetailParamsInfo,
+      DetailCommentInfo,
+      GoodList,
       Scroll
 
     },
@@ -43,13 +50,15 @@
         goods: {},
         shop: {},
         detailInfo: {},
-        paramInfo:{}
-
+        paramInfo:{},
+        commentInfo:[],
+        recommendList:[]
       }
     },
     created() {
       this.iid = this.$route.params.id
       this.getdetail(this.iid)
+      this.getrecommend()
     },
     methods: {
       getdetail(iid) {
@@ -67,6 +76,19 @@
           this.detailInfo = data.detailInfo;
           // 5.获取参数的信息
           this.paramInfo = new GoodsParam(data.itemParams.info, data.itemParams.rule)
+          // 获取评论信息
+          if(data.rate.cRate!==0){
+            this.commentInfo=data.rate.list
+            console.log(this.commentInfo);
+          }
+        })
+      },
+      // 获取推荐数据
+      getrecommend(){
+        getrecommend().then(res=>{
+          // console.log(res);
+          this.recommendList=res.data.list
+          console.log(this.recommendList);
         })
       },
       DetailImageLoad() {

@@ -10,6 +10,11 @@ export function getdetail(iid) {
     }
   })
 }
+export function getrecommend(){
+  return request({
+    url: '/recommend',
+  })
+}
 export class goods {
   constructor(itemInfo, columns, services) {
     this.title = itemInfo.title

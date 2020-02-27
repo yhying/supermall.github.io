@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="ItemClick()">
-    <img :src="goodsItem.show.img" alt="" @load="ImgLoad">
+    <img :src="showimg" alt="" @load="ImgLoad">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -15,22 +15,29 @@
     props: {
       goodsItem: {
         type: Object,
-        default() {
+        default () {
           return {}
         }
       }
     },
+    computed: {
+      showimg() {
+        // return this.goodsItem.image || this.goodsItem.show.img
+        return this.goodsItem.image?this.goodsItem.image:this.goodsItem.show.img
+      }
+    },
     methods: {
-      ImgLoad(){
+      ImgLoad() {
         // console.log('图片加载成功');
         this.$bus.$emit('ImgLoad')
       },
-      ItemClick(){
+      ItemClick() {
         console.log(this.goodsItem);
-        this.$router.push('/detail'+this.goodsItem.iid)
+        this.$router.push('/detail' + this.goodsItem.iid)
       }
     },
   }
+
 </script>
 
 <style scoped>
@@ -81,4 +88,5 @@
     height: 14px;
     background: url("~assets/img/common/collect.svg") 0 0/14px 14px;
   }
+
 </style>
