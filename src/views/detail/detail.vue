@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
-    <detail-nav @titleClick="titleClick"></detail-nav>
-    <scroll class="content" ref="scroll">
+    <detail-nav @titleClick="titleClick" ref="nav"></detail-nav>
+    <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType="3">
       <detail-swiper :TopImages="Topimages"></detail-swiper>
       <detailbase-info :goods="goods"></detailbase-info>
       <Detailshop-Info :shop="shop"></Detailshop-Info>
@@ -10,6 +10,7 @@
       <DetailComment-Info ref="Titlecomment" :commentInfo="commentInfo"></DetailComment-Info>
       <Good-List ref="TitleList" :goods="recommendList"></Good-List>
     </scroll>
+    <Detail-Button></Detail-Button>
   </div>
 </template>
 <script>
@@ -21,6 +22,7 @@
   import DetailParamsInfo from './childComps/DetailParamInfo.vue'
   import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
   import GoodList from 'components/content/goods/GoodsList'
+  import DetailButton from './childComps/DetailBotton.vue'
   import Scroll from 'components/common/scroll/Scroll'
   import {
     itemMixin
@@ -43,6 +45,7 @@
       DetailParamsInfo,
       DetailCommentInfo,
       GoodList,
+      DetailButton,
       Scroll
     },
     mixins: [itemMixin],
@@ -57,7 +60,8 @@
         commentInfo: [],
         recommendList: [],
         itemLister: ' ',
-        titleTopoffset: []
+        titleTopoffset: [],
+        currentindex:0,
       }
     },
     created() {
@@ -81,10 +85,29 @@
         this.titleTopoffset.push(this.$refs.Titleparams.$el.offsetTop)
         this.titleTopoffset.push(this.$refs.Titlecomment.$el.offsetTop)
         this.titleTopoffset.push(this.$refs.TitleList.$el.offsetTop)
-        console.log(this.titleTopoffset);
+        // console.log(this.titleTopoffset);
       },
       titleClick(index) {
         this.$refs.scroll.scrollTo(0, -this.titleTopoffset[index], 200)
+      },
+      // 监听滚动事件
+      contentScroll(position) {
+        // console.log(position);
+        // console.log(this.titleTopoffset);
+        const positionY = -position.y
+        // console.log(positionY);
+        const length = this.titleTopoffset.length
+        for (let i in this.titleTopoffset) {
+          // console.log(positionY);
+          i=parseInt(i)
+          if (this.currentindex!==i && (i < length - 1 && positionY >= this.titleTopoffset[i] && positionY <= this.titleTopoffset[i+1]) || (i ==
+              length - 1 && positionY >= this.titleTopoffset[i])){
+                // console.log(i);
+                this.currentindex=i
+                // console.log(this.$refs.nav);
+                this.$refs.nav.currentIndex=this.currentindex
+              }
+        }
       },
       /* 
       网络请求相关方法
