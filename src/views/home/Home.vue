@@ -21,11 +21,10 @@
   import tabControl from 'components/content/tabControl.vue'
   import GoodList from 'components/content/goods/GoodsList'
   import Scroll from 'components/common/scroll/Scroll'
-  import BackTop from 'components/content/backTop/BackTop'
   import Swiper from './childComps/HomeSwiper.vue'
   import RecommendView from './childComps/RecommendView.vue'
   import FeatureView from './childComps/FeatureView.vue'
-  import {itemMixin} from 'common/mixin.js'
+  import {itemMixin,backTop} from 'common/mixin.js'
   import {
     getHomeMuticata,
     getHomegoods
@@ -39,15 +38,13 @@
       tabControl,
       GoodList,
       Scroll,
-      BackTop
     },
-    mixins:[itemMixin],
+    mixins:[itemMixin,backTop],
     data() {
       return {
         banners: [],
         recomends: [],
         titleList: [],
-        isBackTop: false,
         goods: {
           'pop': {
             page: 0,
@@ -113,9 +110,6 @@
         }
         this.$refs.tabControlref2.currentindex=index;
         this.$refs.tabControlref1.currentindex=index;
-      },
-      backTopClick() {
-        this.$refs.scroll.scrollTo(0, 0)
       },
       contentScroll(position) {
         // console.log(position.y);

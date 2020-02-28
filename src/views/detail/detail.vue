@@ -10,6 +10,7 @@
       <DetailComment-Info ref="Titlecomment" :commentInfo="commentInfo"></DetailComment-Info>
       <Good-List ref="TitleList" :goods="recommendList"></Good-List>
     </scroll>
+    <Back-Top @click.native="backTopClick" v-show="isBackTop"></Back-Top>
     <Detail-Button></Detail-Button>
   </div>
 </template>
@@ -25,7 +26,8 @@
   import DetailButton from './childComps/DetailBotton.vue'
   import Scroll from 'components/common/scroll/Scroll'
   import {
-    itemMixin
+    itemMixin,
+    backTop
   } from 'common/mixin.js'
   import {
     getdetail,
@@ -48,7 +50,7 @@
       DetailButton,
       Scroll
     },
-    mixins: [itemMixin],
+    mixins: [itemMixin,backTop],
     data() {
       return {
         iid: ' ',
@@ -61,7 +63,7 @@
         recommendList: [],
         itemLister: ' ',
         titleTopoffset: [],
-        currentindex:0,
+        currentindex: 0,
       }
     },
     created() {
@@ -94,19 +96,22 @@
       contentScroll(position) {
         // console.log(position);
         // console.log(this.titleTopoffset);
+        // 1.判断BackTop是否显示
+        this.isBackTop = (-position.y) > 1000
         const positionY = -position.y
         // console.log(positionY);
         const length = this.titleTopoffset.length
         for (let i in this.titleTopoffset) {
           // console.log(positionY);
-          i=parseInt(i)
-          if (this.currentindex!==i && (i < length - 1 && positionY >= this.titleTopoffset[i] && positionY <= this.titleTopoffset[i+1]) || (i ==
-              length - 1 && positionY >= this.titleTopoffset[i])){
-                // console.log(i);
-                this.currentindex=i
-                // console.log(this.$refs.nav);
-                this.$refs.nav.currentIndex=this.currentindex
-              }
+          i = parseInt(i)
+          if (this.currentindex !== i && (i < length - 1 && positionY >= this.titleTopoffset[i] && positionY <= this
+              .titleTopoffset[i + 1]) || (i ==
+              length - 1 && positionY >= this.titleTopoffset[i])) {
+            // console.log(i);
+            this.currentindex = i
+            // console.log(this.$refs.nav);
+            this.$refs.nav.currentIndex = this.currentindex
+          }
         }
       },
       /* 
