@@ -28,7 +28,9 @@
       }
     },
     methods: {
-      addToCart() {}
+      addToCart() {
+        this.$emit('addCar')
+      }
     },
   }
 

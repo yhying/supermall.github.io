@@ -2,6 +2,11 @@
   <div class="detail">
     <detail-nav @titleClick="titleClick" ref="nav"></detail-nav>
     <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType="3">
+      <ul>
+        <li v-for="item in $store.state.carList">
+          {{item}}
+        </li>
+      </ul>
       <detail-swiper :TopImages="Topimages"></detail-swiper>
       <detailbase-info :goods="goods"></detailbase-info>
       <Detailshop-Info :shop="shop"></Detailshop-Info>
@@ -11,7 +16,7 @@
       <Good-List ref="TitleList" :goods="recommendList"></Good-List>
     </scroll>
     <Back-Top @click.native="backTopClick" v-show="isBackTop"></Back-Top>
-    <Detail-Button></Detail-Button>
+    <Detail-Button @addCar="addCar"></Detail-Button>
   </div>
 </template>
 <script>
@@ -50,7 +55,7 @@
       DetailButton,
       Scroll
     },
-    mixins: [itemMixin,backTop],
+    mixins: [itemMixin, backTop],
     data() {
       return {
         iid: ' ',
@@ -92,6 +97,20 @@
       titleClick(index) {
         this.$refs.scroll.scrollTo(0, -this.titleTopoffset[index], 200)
       },
+      // 监听加入购物车事件
+      addCar() {
+        // console.log(this.Topimages);
+        // 1.创建对象
+        const product = {}
+        // 2.对象信息
+        product.iid = this.iid;
+        product.imgURL = this.Topimages[0]
+        product.title = this.goods.title
+        product.desc = this.goods.desc;
+        product.newPrice = this.goods.realPrice;
+        console.log(product);
+        this.$store.commit('addCart',product)
+      },
       // 监听滚动事件
       contentScroll(position) {
         // console.log(position);
@@ -119,7 +138,7 @@
       */
       getdetail(iid) {
         getdetail(iid).then(res => {
-          console.log(res);
+          // console.log(res);
           const data = res.result
           this.Topimages = data.itemInfo.topImages
           // console.log(this.Topimages);
@@ -135,7 +154,7 @@
           // 获取评论信息
           if (data.rate.cRate !== 0) {
             this.commentInfo = data.rate.list
-            console.log(this.commentInfo);
+            // console.log(this.commentInfo);
           }
         })
       },

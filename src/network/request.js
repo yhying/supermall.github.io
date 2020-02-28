@@ -7,7 +7,7 @@ export function request(config) {
     // baseURL: 'http://192.168.0.104:3000',
     // baseURL: 'http://106.54.54.237:8000/api/hy',
     baseURL: 'http://106.54.54.237:8000/api/wh',
-    timeout: 5000
+    timeout: 3000
   })
 
   // 2.axios的拦截器
