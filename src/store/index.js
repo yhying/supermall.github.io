@@ -1,31 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import mutations from './mutation'
+import actions from './action'
 Vue.use(Vuex)
 
 // 创建store对象
+const state={
+    carList:[]
+}
 const store=new Vuex.Store({
-    state:{
-        carList:[]
-    },
-    mutations:{
-        addCart(state,payload){
-            let olditem=null
-            let aa=null
-            for (let item of state.carList) {
-                if(item.iid===payload.iid){
-                    olditem=item
-                }
-            }
-            if(olditem){
-                olditem.count +=1
-            }else {
-                payload.count=1
-                state.carList.push(payload)
-            }
-
-        }
-    }
+    state,
+    mutations,
+    actions,
 })
 // 挂载vue实例上
 export default store

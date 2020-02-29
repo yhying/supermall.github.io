@@ -109,7 +109,7 @@
         product.desc = this.goods.desc;
         product.newPrice = this.goods.realPrice;
         console.log(product);
-        this.$store.commit('addCart',product)
+        this.$store.dispatch('addCart',product)
       },
       // 监听滚动事件
       contentScroll(position) {
