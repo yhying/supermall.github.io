@@ -18,7 +18,10 @@
         }
     },
     computed: {
-        ...mapGetters(['carList'])
+        ...mapGetters(['carList'])  /* 数组写法 */
+        // ...mapGetters({
+        //   length:'carList'  /* 对象语法 映射，可以改变属性名 */  
+        // })
     },
   }
 
