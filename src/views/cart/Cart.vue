@@ -1,33 +1,62 @@
 <template>
-  <div>
+  <div class="cart">
     <nav-bar class="cart-nav">
-      <div slot="center">购物车({{carList}})</div>
+      <div slot="center">购物车({{carListlength}})</div>
     </nav-bar>
+    <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType="3">
+      <cart-list></cart-list>
+    </scroll>
   </div>
 </template>
 <script>
   import NavBar from 'components/common/navbar/NavBar'
-  import {mapGetters} from 'vuex'
+  import cartList from './childComps/cartList.vue'
+  import Scroll from 'components/common/scroll/Scroll.vue'
+  import {
+    mapGetters
+  } from 'vuex'
   export default {
     components: {
-      NavBar
+      NavBar,
+      cartList,
+      Scroll
     },
     data() {
-        return {
-            
-        }
+      return {
+
+      }
     },
     computed: {
-        ...mapGetters(['carList'])  /* 数组写法 */
-        // ...mapGetters({
-        //   length:'carList'  /* 对象语法 映射，可以改变属性名 */  
-        // })
+      ...mapGetters(['carListlength']) /* 数组写法 */
+      // ...mapGetters({
+      //   length:'carListlength'  /* 对象语法 映射，可以改变属性名 */  
+      // })
+    },
+    methods: {
+      /* 
+      事件监听相关方法
+      */
+      contentScroll() {
+      }
     },
   }
 
 </script>
 <style scoped>
-  .cart-nav{
+  .cart {
+    position: relative;
+    height: 100vh;
+  }
+  .content {
+    /* height: calc(100% - 44px); */
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+    bottom:49px;
+    left: 0;
+    right: 0;
+  }
+  .cart-nav {
     background-color: var(--color-tint);
     color: #fff;
     font-weight: 700;

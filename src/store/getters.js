@@ -1,6 +1,10 @@
 
 export default{
-    carList(state){
+    carListlength(state){
         return state.carList.length
+    },
+    carList(state){
+        return state.carList
     }
+
 }
