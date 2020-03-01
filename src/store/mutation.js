@@ -7,6 +7,7 @@ export default {
     payload.count++
   },
   [ADD_IN_CART](state, payload) {
+    payload.check=true
     state.carList.push(payload)
   }
 }

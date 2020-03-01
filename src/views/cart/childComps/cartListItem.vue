@@ -1,8 +1,7 @@
 <template>
   <div id="shop-item">
     <!-- 选中按钮 -->
-    <!-- <check-button @colorCheck='colorCheck' :is-checked='itemInfo.check'></check-button> -->
-
+    <check-button @colorCheck='colorCheck' :is-checked='itemInfo.check'></check-button>
     <div class="item-img">
       <img :src="itemInfo.imgURL" alt="商品图片">
     </div>
@@ -17,9 +16,10 @@
   </div>
 </template>
 <script>
+  import checkButton from 'components/content/cartcheck/cartbuttonbar.vue'
   export default {
     components: {
-
+      checkButton
     },
     props: {
       itemInfo: {
@@ -31,7 +31,12 @@
     },
     data() {
       return {
-
+      }
+    },
+    methods: {
+      // 监听选中
+      colorCheck(){
+        this.itemInfo.check=!this.itemInfo.check
       }
     },
   }

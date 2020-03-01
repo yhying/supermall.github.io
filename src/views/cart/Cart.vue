@@ -32,6 +32,9 @@
       //   length:'carListlength'  /* 对象语法 映射，可以改变属性名 */  
       // })
     },
+    activated() {
+      this.$refs.scroll.refresh()
+    },
     methods: {
       /* 
       事件监听相关方法
