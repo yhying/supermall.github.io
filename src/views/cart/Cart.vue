@@ -6,12 +6,14 @@
     <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType="3">
       <cart-list></cart-list>
     </scroll>
+    <cartBotton></cartBotton>
   </div>
 </template>
 <script>
   import NavBar from 'components/common/navbar/NavBar'
   import cartList from './childComps/cartList.vue'
   import Scroll from 'components/common/scroll/Scroll.vue'
+  import cartBotton from './childComps/cartBotton.vue'
   import {
     mapGetters
   } from 'vuex'
@@ -19,7 +21,8 @@
     components: {
       NavBar,
       cartList,
-      Scroll
+      Scroll,
+      cartBotton
     },
     data() {
       return {
@@ -55,7 +58,7 @@
     overflow: hidden;
     position: absolute;
     top: 44px;
-    bottom:49px;
+    bottom:94px;
     left: 0;
     right: 0;
   }

@@ -19,7 +19,7 @@
   import checkButton from 'components/content/cartcheck/cartbuttonbar.vue'
   export default {
     components: {
-      checkButton
+      checkButton,
     },
     props: {
       itemInfo: {
