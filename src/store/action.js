@@ -19,12 +19,12 @@ export default {
       }
       if (olditem) {
         commit(ADD_COUNTER, olditem)
-        resolve('当前数量加1')
+        resolve('加入购物车成功')
       } else {
         payload.count = 1
         // state.carList.push(payload)
         commit(ADD_IN_CART, payload)
-        resolve('当前商品加1')
+        resolve('加入购物车成功')
       }
     })
   }

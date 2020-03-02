@@ -5,7 +5,7 @@
       <span class="select">全选</span>
       <span>合计:{{totalprice}}</span>
     </div>
-    <div class="jiesuan">
+    <div class="jiesuan" @click="toPrice">
       去结算({{jiesuanLength}})
     </div>
   </div>
@@ -56,6 +56,11 @@
           this.carList.forEach(item=>{
             item.check=true
           })
+        }
+      },
+      toPrice(){
+        if(!this.isAllcheck){
+          this.$toast.show('请选择需要的商品',3000)
         }
       }
     },
