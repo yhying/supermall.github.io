@@ -168,6 +168,7 @@
     z-index: 999; */
     background-color: var(--color-tint);
     color: #fff;
+    font-weight: 700;
   }
 
   .content {

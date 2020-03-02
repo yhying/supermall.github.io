@@ -1,114 +1,29 @@
 <template>
-    <div>
-      <ul>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-          <li>我爱你</li>
-      </ul>
-    </div>
+  <div class="category">
+    <nav-bar class="category-nav">
+      <div slot="center">分类</div>
+    </nav-bar>
+  </div>
 </template>
 <script>
-export default {
-    
-}
+  import NavBar from 'components/common/navbar/NavBar'
+  export default {
+    components: {
+      NavBar
+    },
+    data() {
+      return {
+
+      }
+    },
+  }
+
 </script>
 <style scoped>
-    ul {
-        height: 200px;
-        background-color: aquamarine;
-        max-height: 200px;
-        overflow-y: scroll;
-    }
+  .category-nav {
+    background-color: var(--color-tint);
+    color: #fff;
+    font-weight: 700;
+  }
+
 </style>

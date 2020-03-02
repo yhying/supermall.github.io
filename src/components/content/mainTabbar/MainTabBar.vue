@@ -10,10 +10,13 @@
       <img slot="item-icon-active" src="~assets/img/tabbar/category_active.svg" alt="">
       <div slot="item-text">分类</div>
     </tab-bar-item>
-    <tab-bar-item path="/cart" :activeColor="activeColor">
+    <tab-bar-item path="/cart" :activeColor="activeColor" class="car">
       <img slot="item-icon" src="~assets/img/tabbar/shopcart.svg" alt="">
       <img slot="item-icon-active" src="~assets/img/tabbar/shopcart_active.svg" alt="">
-      <div slot="item-text">购物车</div>
+      <div slot="item-text">
+        购物车
+        <div class="car_number">{{carListlength}}</div>
+      </div>
     </tab-bar-item>
     <tab-bar-item path="/profile" :activeColor="activeColor">
       <img slot="item-icon" src="~assets/img/tabbar/profile.svg" alt="">
@@ -26,6 +29,7 @@
 <script>
   import TabBar from 'components/common/tabbar/TabBar'
   import TabBarItem from 'components/common/tabbar/TabBarItem'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: "MainTabBar",
@@ -38,9 +42,27 @@
         activeColor:'rgb(255,87,179)'
       }
     },
+    computed: {
+      ...mapGetters(['carListlength'])
+    },
   }
 
 </script>
 
 <style scoped>
+  .car {
+    position: relative;
+  }
+  .car_number {
+    position: absolute;
+    top: -8px;
+    right: 28px;
+    color: #fff;
+    width: 23px;
+    height: 23px;
+    line-height: 23px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: red;
+  }
 </style>
