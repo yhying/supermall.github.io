@@ -112,7 +112,7 @@
         //   console.log(res);
         // })
         this.addCart(product).then(res=>{
-          console.log(res);
+          this.$toast.show(res,2000)
         })
       },
       // 监听滚动事件
