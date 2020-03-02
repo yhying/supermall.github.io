@@ -1,7 +1,7 @@
 <template>
   <div class="cartbotton">
     <div class="price">
-      <check-button @click.native="selectAll" :is-checked='Allselect'></check-button>
+      <check-button @click.native="selectAll" :is-checked='isAllcheck'></check-button>
       <span class="select">全选</span>
       <span>合计:{{totalprice}}</span>
     </div>
@@ -21,8 +21,6 @@
     },
     data() {
       return {
-        Allselect: true,
-        flag: false,
       }
     },
     computed: {
@@ -38,24 +36,27 @@
         return this.carList.filter(item=>{
           return item.check
         }).length
+      },
+      isAllcheck(){
+        if(this.carList.length===0){
+          return false
+        }
+        return !this.carList.find(item=>{
+         return !item.check
+        })
       }
     },
     methods: {
       selectAll() {
-        var this_=this
-        this_.$store.state.carList.forEach(item => {
-          if (this_.flag===true) {
-            this_.Allselect = true;
-            item.check = true
-            this_.flag = false
-            console.log(this_.flag);
-          } else {
-            this_.Allselect = false;
-            item.check = false
-            this_.flag = true
-            console.log(this_.flag);
-          }
-        })
+        if(this.isAllcheck){
+          this.carList.forEach(item=>{
+            item.check=false
+          })
+        }else {
+          this.carList.forEach(item=>{
+            item.check=true
+          })
+        }
       }
     },
   }

@@ -30,6 +30,9 @@
     backTop
   } from 'common/mixin.js'
   import {
+    mapActions
+  } from 'vuex'  /* 映射action里的方法 */
+  import {
     getdetail,
     goods,
     Shop,
@@ -77,6 +80,7 @@
       this.$bus.$off('ImgLoad', this.itemLister) /* 第二个参数必须传入一个函数 */
     },
     methods: {
+      ...mapActions(['addCart']),  /* 映射action里的方法 */
       /* 
       事件监听相关方法
       */
@@ -104,7 +108,12 @@
         product.desc = this.goods.desc;
         product.newPrice = this.goods.realPrice;
         console.log(product);
-        this.$store.dispatch('addCart',product)
+        // this.$store.dispatch('addCart',product).then(res=>{
+        //   console.log(res);
+        // })
+        this.addCart(product).then(res=>{
+          console.log(res);
+        })
       },
       // 监听滚动事件
       contentScroll(position) {
