@@ -3,13 +3,19 @@
     <nav-bar class="profile-nav">
       <div slot="center">我的档案</div>
     </nav-bar>
+    <User></User>
+    <user-list></user-list>
   </div>
 </template>
 <script>
   import NavBar from 'components/common/navbar/NavBar'
+  import User from './childComps/user.vue'
+  import UserList from './childComps/UserList.vue'
   export default {
     components: {
-      NavBar
+      NavBar,
+      User,
+      UserList
     },
     data() {
       return {
