@@ -1,14 +1,14 @@
-import axios from './axios'
-
+// import request from './request'
+import request from './axios'
 
 export function getCategory() {
-  return axios({
+  return request({
     url: '/category'
   })
 }
 
 export function getSubcategory(maitKey) {
-  return axios({
+  return request({
     url: '/subcategory',
     params: {
       maitKey

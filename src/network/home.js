@@ -1,4 +1,6 @@
-import {request} from './request.js'
+// import {request} from './request.js'
+import request from './axios'
+
 
 export function getHomeMuticata(){
     return request({
