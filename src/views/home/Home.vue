@@ -87,9 +87,9 @@
       this.getHomegoods('sell')
     },
     mounted() {
-      this.$nextTick(()=>{
-        this.$refs.scroll.refresh()
-      })
+      // this.$nextTick(()=>{
+      //   this.$refs.scroll.refresh()
+      // })
     },
     methods: {
       /* 

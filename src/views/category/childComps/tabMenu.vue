@@ -1,19 +1,15 @@
 <template>
-  <scroll id="tab-menu">
-    <div class="menu-list">
-      <div class="menu-list-item" :class="{active: index===currentIndex}" v-for="(item, index) in categories"
-        :key="index" @click="itemClick(index)">
-        {{item.title}}
-      </div>
+  <div class="menu-list">
+    <div class="menu-list-item" :class="{active: index===currentIndex}" v-for="(item, index) in categories" :key="index"
+      @click="itemClick(index)">
+      {{item.title}}
     </div>
-  </scroll>
+  </div>
 </template>
 
 <script>
-  import Scroll from 'components/common/scroll/Scroll.vue'
   export default {
     components: {
-      Scroll,
     },
     props: {
       categories: {
@@ -40,12 +36,10 @@
 </script>
 
 <style scoped>
-  #tab-menu {
+  .menu-list {
     background-color: #f6f6f6;
-    height: calc(100% - 44px - 49px);
     width: 100px;
   }
-
   .menu-list-item {
     height: 45px;
     line-height: 45px;
