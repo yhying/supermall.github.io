@@ -1,8 +1,8 @@
 <template>
   <div class="profile">
-    <nav-bar class="profile-nav">
+    <!-- <nav-bar class="profile-nav">
       <div slot="center">我的档案</div>
-    </nav-bar>
+    </nav-bar> -->
     <User></User>
     <user-list></user-list>
   </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="cart">
-    <nav-bar class="cart-nav">
+    <!-- <nav-bar class="cart-nav">
       <div slot="center">购物车({{carListlength}})</div>
-    </nav-bar>
+    </nav-bar> -->
     <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType="3">
       <cart-list></cart-list>
     </scroll>
@@ -57,7 +57,7 @@
     /* height: calc(100% - 44px); */
     overflow: hidden;
     position: absolute;
-    top: 44px;
+    top:0;
     bottom:94px;
     left: 0;
     right: 0;

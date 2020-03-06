@@ -1,8 +1,8 @@
 <template>
   <div class="category">
-    <nav-bar class="category-nav">
+    <!-- <nav-bar class="category-nav">
       <div slot="center">分类</div>
-    </nav-bar>
+    </nav-bar> -->
     <scroll class="content1" ref="scroll" @scroll="contentScroll" :probeType="3">
       <tab-menu :categories="categories" @selectItem="selectItem"></tab-menu>
     </scroll>
@@ -96,7 +96,7 @@
   .content1 {
     overflow: hidden;
     position: absolute;
-    top: 44px;
+    top:0;
     bottom:49px;
     left:0;
     right: 0;
@@ -105,7 +105,7 @@
   .content2 {
     overflow-y: hidden;
     position: absolute;
-    top: 44px;
+    top:0;
     bottom:49px;
     left:100px;
     right: 0;

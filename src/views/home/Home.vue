@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <nav-bar class="home-nav">
+    <!-- <nav-bar class="home-nav">
       <div slot="center">购物街</div>
-    </nav-bar>
+    </nav-bar> -->
     <tab-Control class="tab-control" :title="titleList" @tabclick="tabClick" ref="tabControlref1" v-show="istabfixed"></tab-Control>
       <Scroll class="content" ref="scroll" :probe-type="3" :pull-up-load="true" @scroll="contentScroll"
       @pullingUp="loadmore" >
@@ -174,7 +174,7 @@
   .content {
     overflow: hidden;
     position: absolute;
-    top: 44px;
+    top:0;
     bottom: 49px;
     left: 0;
     right: 0;
