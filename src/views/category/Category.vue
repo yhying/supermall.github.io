@@ -52,7 +52,8 @@
         // console.log('刷新滚动距离');
       },
       contentScroll(){
-
+        console.log(111);
+        // this.$refs.scroll.refresh();
       },
       /* 
       网络请求相关方法
@@ -97,16 +98,16 @@
     overflow: hidden;
     position: absolute;
     top:0;
-    bottom:49px;
+    bottom:96px;
     left:0;
     right: 0;
     width: 100px;
   }
   .content2 {
-    overflow-y: hidden;
+    overflow: hidden;
     position: absolute;
     top:0;
-    bottom:49px;
+    bottom:96px;
     left:100px;
     right: 0;
   }
