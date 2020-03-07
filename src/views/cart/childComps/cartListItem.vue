@@ -1,5 +1,5 @@
 <template>
-  <div id="shop-item">
+  <div id="shop-item" @touchstart="touchstart(itemInfo)" @touchmove="touchmove" @touchend="touchend">
     <!-- 选中按钮 -->
     <check-button @colorCheck='colorCheck' :is-checked='itemInfo.check'></check-button>
     <div class="item-img">
@@ -13,6 +13,18 @@
         <div class="item-count right">x{{itemInfo.count}}</div>
       </div>
     </div>
+    <div class="bgc" v-show="isShow" @click="closeBgc">
+      <div>
+        <p>设置</p>
+        <p>常买</p>
+      </div>
+      <div>
+        <p>移入</p>
+        <p>关注</p>
+      </div>
+      <div>看相似</div>
+      <div @click="remove()">删除</div>
+    </div>
   </div>
 </template>
 <script>
@@ -24,33 +36,116 @@
     props: {
       itemInfo: {
         type: Object,
+        default () {
+          return {}
+        }
+      },
+      Show:{
+        type:Boolean,
         default(){
-            return {}
+          return false
         }
       }
     },
     data() {
       return {
+        time:0,
+        jsq:null,
+        isShow:false,
+        id:' '
       }
+    },
+    deactivated() {
+      this.isShow=false;
     },
     methods: {
       // 监听选中
-      colorCheck(){
-        this.itemInfo.check=!this.itemInfo.check
+      colorCheck() {
+        this.itemInfo.check = !this.itemInfo.check
+      },
+      // 监听长按事件
+      touchstart(itemInfo) {
+        console.log(this.Show);
+        this.isShow=this.Show
+        this.jsq = setInterval(() => {
+          this.time++
+          if (this.time > 1) {
+            console.log(itemInfo.iid);
+            // this.id=itemInfo.iid
+            this.isShow=true
+            this.$emit('Closebgc')
+          }
+        }, 500)
+      },
+      touchend() {
+        clearInterval(this.jsq)
+        if (this.time > 1) {
+          console.log('我是长按22')
+          this.time = 0
+        }
+      },
+      touchmove() {
+        clearInterval(this.jsq)
+        console.log('2222');
+        this.time = 0
+      },
+      // 监听关闭事件
+      closeBgc(){
+        this.isShow=false;
+      },
+      // 监听删除商品事件
+      remove(){
+        console.log('删除商品成功');
       }
-    },
+    }
   }
 
 </script>
 <style scoped>
   #shop-item {
+    position: relative;
     width: 100%;
     display: flex;
     font-size: 0;
-    padding: 5px;
+    /* padding: 5px; */
     border-bottom: 1px solid #ccc;
   }
-
+  .bgc {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:rgba(36,41,44,0.5);
+    /* justify-content: space-around; */
+    align-items: center;
+  }
+  .bgc div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    margin-left: 22px;
+    background-color:#f0f0f0;
+    z-index: 999;
+    font-size: 14px;
+    color: #333;
+  }
+  .bgc div:nth-child(2){
+    background-color:#ffc700;
+    color: #fff;
+  }
+  .bgc div:nth-child(3){
+    background-color:#fd6a2b;
+    color: #fff;
+  }
+  .bgc div:nth-child(4){
+    background-color:#f81300;
+    color: #fff;
+  }
   .item-title,
   .item-desc {
     overflow: hidden;

@@ -52,8 +52,8 @@
         // console.log('刷新滚动距离');
       },
       contentScroll(){
-        console.log(111);
-        // this.$refs.scroll.refresh();
+        // console.log(111);
+        this.$refs.scroll.refresh();
       },
       /* 
       网络请求相关方法

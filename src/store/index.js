@@ -6,8 +6,9 @@ import getters from './getters'
 Vue.use(Vuex)
 
 // 创建store对象
+const car=JSON.parse(localStorage.getItem('car') || '[]')
 const state={
-    carList:[]
+    carList:car,
 }
 const store=new Vuex.Store({
     state,

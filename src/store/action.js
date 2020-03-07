@@ -26,6 +26,8 @@ export default {
         commit(ADD_IN_CART, payload)
         resolve('加入购物车成功')
       }
+      // 数据保存到本地存储
+      localStorage.setItem('car',JSON.stringify(state.carList))
     })
   }
 }
