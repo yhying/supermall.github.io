@@ -9,7 +9,7 @@ export default {
     commit
   }, payload) {
     /* 对象结构 */
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       let olditem = null
       let aa = null
       for (let item of state.carList) {
@@ -27,7 +27,17 @@ export default {
         resolve('加入购物车成功')
       }
       // 数据保存到本地存储
-      localStorage.setItem('car',JSON.stringify(state.carList))
+      localStorage.setItem('car', JSON.stringify(state.carList))
+    })
+  },
+  removeCar({
+    state,
+    commit
+  }, payload) {
+    return new Promise((resolve, reject) => {
+      commit('remove_in_cart', payload)
+      // 数据保存到本地存储
+      localStorage.setItem('car', JSON.stringify(state.carList))
     })
   }
 }

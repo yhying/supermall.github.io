@@ -9,5 +9,10 @@ export default {
   [ADD_IN_CART](state, payload) {
     payload.check=true
     state.carList.push(payload)
+  },
+  remove_in_cart(state,payload){
+  state.carList=state.carList.filter((item)=>{
+    return !(item.iid==payload)
+    })
   }
 }

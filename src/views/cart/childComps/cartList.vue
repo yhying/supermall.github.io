@@ -1,10 +1,10 @@
 <template>
   <div class="cartlist">
     <!-- <cartListItem v-for="item in carList" :itemInfo="item" @Closebgc="Closebgc" :Show="isShow"></cartListItem> -->
-    <div id="shop-item" v-for="itemInfo in carList" @touchstart="touchstart(itemInfo)" @touchmove="touchmove"
+    <div id="shop-item" v-for="(itemInfo,i) in carList" @touchstart="touchstart(itemInfo)" @touchmove="touchmove"
       @touchend="touchend">
       <!-- 选中按钮 -->
-      <check-button @colorCheck='colorCheck' :is-checked='itemInfo.check'></check-button>
+      <check-button @click.native="colorCheck(itemInfo)" :is-checked='itemInfo.check'></check-button>
       <div class="item-img">
         <img :src="itemInfo.imgURL" alt="商品图片">
       </div>
@@ -16,17 +16,19 @@
           <div class="item-count right">x{{itemInfo.count}}</div>
         </div>
       </div>
-      <div class="bgc" v-show="itemInfo.iid==id?true:false" @click="closeBgc">
-        <div>
-          <p>设置</p>
-          <p>常买</p>
+      <div class="bgc-mask" v-show="itemInfo.iid==id?true:false" @click="closeBgc">
+        <div class="bgc">
+          <div>
+            <p>设置</p>
+            <p>常买</p>
+          </div>
+          <div>
+            <p>移入</p>
+            <p>关注</p>
+          </div>
+          <div>看相似</div>
+          <div @click="remove(itemInfo.iid,i)">删除</div>
         </div>
-        <div>
-          <p>移入</p>
-          <p>关注</p>
-        </div>
-        <div>看相似</div>
-        <div @click="remove()">删除</div>
       </div>
     </div>
   </div>
@@ -51,7 +53,7 @@
       }
     },
     deactivated() {
-      this.id='';
+      this.id = '';
     },
     computed: {
       ...mapGetters(['carList'])
@@ -62,8 +64,9 @@
       //   this.isShow=false
       // },
       // 监听选中
-      colorCheck() {
-        this.itemInfo.check = !this.itemInfo.check
+      colorCheck(itemInfo) {
+        console.log(itemInfo);
+        itemInfo.check = !itemInfo.check
       },
       // 监听长按事件
       touchstart(itemInfo) {
@@ -92,11 +95,14 @@
       },
       // 监听关闭事件
       closeBgc() {
-        this.id='';
+        this.id = '';
       },
       // 监听删除商品事件
-      remove() {
+      remove(id, i) {
         console.log('删除商品成功');
+        // console.log(id,i);
+        this.carList.splice(i, 1)
+        this.$store.dispatch('removeCar', id)
       }
     },
   }
@@ -110,6 +116,7 @@
     font-size: 0;
     /* padding: 5px; */
     border-bottom: 1px solid #ccc;
+    touch-action: none;
   }
 
   .bgc {
