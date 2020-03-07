@@ -16,20 +16,21 @@
           <div class="item-count right">x{{itemInfo.count}}</div>
         </div>
       </div>
-      <div class="bgc-mask" v-show="itemInfo.iid==id?true:false" @click="closeBgc">
-        <div class="bgc">
-          <div>
-            <p>设置</p>
-            <p>常买</p>
-          </div>
-          <div>
-            <p>移入</p>
-            <p>关注</p>
-          </div>
-          <div>看相似</div>
-          <div @click="remove(itemInfo.iid,i)">删除</div>
+      <div class="bgc" v-show="itemInfo.iid==id?true:false" @click="closeBgc">
+        <div>
+          <p>设置</p>
+          <p>常买</p>
         </div>
+        <div>
+          <p>移入</p>
+          <p>关注</p>
+        </div>
+        <div>看相似</div>
+        <div @click="remove(itemInfo.iid,i)">删除</div>
       </div>
+    </div>
+    <div class="bgc-mask" v-show="isShow" @click="closeBgc">
+
     </div>
   </div>
 </template>
@@ -49,7 +50,8 @@
       return {
         time: 0,
         jsq: null,
-        id: ''
+        id: '',
+        isShow:false,
       }
     },
     deactivated() {
@@ -78,7 +80,7 @@
           if (this.time > 1) {
             console.log(itemInfo.iid);
             this.id = itemInfo.iid
-            // this.isShow=true
+            this.isShow=true
             // this.$emit('Closebgc')
           }
         }, 500)
@@ -96,6 +98,7 @@
       // 监听关闭事件
       closeBgc() {
         this.id = '';
+        this.isShow=false
       },
       // 监听删除商品事件
       remove(id, i) {
@@ -109,6 +112,19 @@
 
 </script>
 <style scoped>
+  .cartlist {
+    position: relative;
+  }
+
+  .bgc-mask {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(36, 41, 44, 0);
+  }
+
   #shop-item {
     position: relative;
     width: 100%;
