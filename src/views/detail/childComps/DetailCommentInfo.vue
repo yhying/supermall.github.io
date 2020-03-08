@@ -23,13 +23,18 @@
         </div>
       </div>
     </div>
+    <range></range>
   </div>
 </template>
 <script>
+  import range from 'components/common/range/range.vue'
   import {
     formatDate
   } from 'common/utils.js'
   export default {
+    components:{
+      range
+    },
     props: {
       commentInfo: {
         type: Array,
@@ -94,7 +99,7 @@
   }
 
   .info-detail {
-    padding: 0 5px 15px;
+    padding: 0 5px;
   }
 
   .info-detail p {

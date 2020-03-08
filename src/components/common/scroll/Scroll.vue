@@ -30,12 +30,15 @@
     },
     mounted() {
       // 1.创建BScroll对象
-      this.scroll = new BScroll(this.$refs.wrapper, {
+      // this.$nextTick(() => {
+        this.scroll = new BScroll(this.$refs.wrapper, {
         click: true,
         /* betterscotrl 里面除了button 若为false其他不能被点击， */
         probeType: this.probeType,
         pullUpLoad: this.pullUpLoad
       })
+      console.log(this.scroll);
+      // })
       // 2.监听滚动的位置
       if (this.probeType === 3) {
         this.scroll.on('scroll', (position) => {
