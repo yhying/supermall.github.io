@@ -4,9 +4,9 @@
       <div slot="center">购物车({{carListlength}})</div>
     </nav-bar> -->
     <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType="3">
-    <cart-list></cart-list>
-  </scroll>
-      <cartBotton></cartBotton>
+      <cart-list></cart-list>
+    </scroll>
+    <cartBotton></cartBotton>
   </div>
 </template>
 <script>
@@ -33,15 +33,14 @@
       //   length:'carListlength'  /* 对象语法 映射，可以改变属性名 */  
       // })
     },
+    activated() {
+        this.$refs.scroll.refresh()
+      },
     methods: {
       /* 
       事件监听相关方法
       */
-      contentScroll() {
-      },
-      activated() {
-      this.$refs.scroll.refresh()
-    },
+      contentScroll() {},
     },
   }
 

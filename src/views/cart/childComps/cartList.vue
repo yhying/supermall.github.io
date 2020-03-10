@@ -74,7 +74,7 @@
       touchstart(itemInfo) {
         // console.log(this.Show);
         // this.isShow=this.Show
-        console.log(itemInfo);
+        // console.log(itemInfo);
         this.jsq = setInterval(() => {
           this.time++
           if (this.time > 1) {
