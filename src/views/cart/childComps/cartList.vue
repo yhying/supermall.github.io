@@ -106,16 +106,20 @@
         // console.log(id,i);
         this.carList.splice(i, 1)
         this.$store.dispatch('removeCar', id)
-      }
+      },
+      contentScroll() {
+      },
+      activated() {
+      this.$refs.scroll.refresh()
+    },
     },
   }
 
 </script>
 <style scoped>
-  .cartlist {
-    position: relative;
-  }
-
+  /* .cartlist {
+    overflow: hidden;
+  } */
   .bgc-mask {
     position: absolute;
     height: 100%;

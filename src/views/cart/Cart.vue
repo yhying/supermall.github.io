@@ -4,9 +4,9 @@
       <div slot="center">购物车({{carListlength}})</div>
     </nav-bar> -->
     <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType="3">
-      <cart-list></cart-list>
-    </scroll>
-    <cartBotton></cartBotton>
+    <cart-list></cart-list>
+  </scroll>
+      <cartBotton></cartBotton>
   </div>
 </template>
 <script>
@@ -25,8 +25,7 @@
       cartBotton
     },
     data() {
-      return {
-      }
+      return {}
     },
     computed: {
       ...mapGetters(['carListlength']) /* 数组写法 */
@@ -34,15 +33,15 @@
       //   length:'carListlength'  /* 对象语法 映射，可以改变属性名 */  
       // })
     },
-    activated() {
-      this.$refs.scroll.refresh()
-    },
     methods: {
       /* 
       事件监听相关方法
       */
       contentScroll() {
-      }
+      },
+      activated() {
+      this.$refs.scroll.refresh()
+    },
     },
   }
 
@@ -52,15 +51,17 @@
     position: relative;
     height: 100vh;
   }
+
   .content {
-    /* height: calc(100% - 44px); */
-    overflow: hidden;
-    position: absolute;
-    top:0;
-    bottom:94px;
+    height: calc(100vh - 142px);
+    /* position: absolute;
+    top: 0;
+    bottom: 94px;
     left: 0;
-    right: 0;
+    right: 0; */
+    overflow: hidden;
   }
+
   .cart-nav {
     background-color: var(--color-tint);
     color: #fff;
